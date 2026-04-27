@@ -35,9 +35,9 @@ class UsuarioService {
         return {mensagem:"erro ao criar usuario",  data:[newUser],status:false}
     }
 
-    async put({nome,email,senha},id) {
+    async put({nome,email,senha,id}) {
 
-        const userModify = await pool.query("UPDATE usuario SET nome = $1, email= $2, senha=$3 where=$4 RETURNING *", [nome,email,senha,id])
+        const userModify = await pool.query("UPDATE usuario SET nome = $1, email= $2, senha=$3 where id=$4 RETURNING *", [nome,email,senha,id])
 
         if(userModify.rowCount===1){
 

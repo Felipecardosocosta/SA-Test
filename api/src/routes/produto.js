@@ -1,14 +1,14 @@
 import { Router } from "express";
-import { usuarioService } from "../services/usuario";
 
 
 
 
-const routesUsuario = Router()
+
+const routesProduto = Router()
 
 
 
-routesUsuario.post('/cadastro',async(req,res)=>{
+routesProduto.post('/cadastro',async(req,res)=>{
     const {nome,email,senha} = req.body
     try {
         const cadastro = await usuarioService.createUser({nome,email,senha})
@@ -29,7 +29,7 @@ routesUsuario.post('/cadastro',async(req,res)=>{
     }
 
 } )
-routesUsuario.post('/login',async(req,res)=>{
+routesProduto.post('/login',async(req,res)=>{
     const {email,senha} = req.body
     try {
         const login = await usuarioService.login({email,senha})
@@ -51,7 +51,7 @@ routesUsuario.post('/login',async(req,res)=>{
 
 } )
 
-routesUsuario.delete('/deletar/:id',async(req,res)=>{
+routesProduto.delete('/deletar/:id',async(req,res)=>{
     const {id} = req.params
     try {
         const cadastro = await usuarioService.delete(id)
@@ -73,7 +73,7 @@ routesUsuario.delete('/deletar/:id',async(req,res)=>{
 
 })
 
-routesUsuario.put('/modificar/:id',async(req,res)=>{
+routesProduto.put('/modificar/:id',async(req,res)=>{
     const {nome,email,senha} = req.body
 
     const id = req.params
@@ -99,4 +99,4 @@ routesUsuario.put('/modificar/:id',async(req,res)=>{
 
 })
 
-export default routesUsuario
+export default routesProduto

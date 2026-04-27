@@ -13,14 +13,14 @@ class ProdutoService {
     }
 
     async getById(id) {
-           const res = await pool.query("SELECT * from produtos where=$1",[id])
+           const res = await pool.query("SELECT * from produtos where id=$1",[id])
         
         if (res.rows.length>0) {
 
             
-            return {mensagem:"produto encontrado", data:res.rows[0],status:true}
+            return {mensagem:"Produto encontrado", data:res.rows[0],status:true}
         }
-        return {mensagem:"Produtos não cadastrado", data:[],status:false}
+        return {mensagem:"Produto não cadastrado", data:[],status:false}
     }
 
 
@@ -40,37 +40,44 @@ class ProdutoService {
 
     async comprar(id,quantidade) {
 
+        const estoque = await this.getById(id)
 
-        const userModify = await pool.query("UPDATE usuario SET nome = $1, email= $2, senha=$3 where=$4 RETURNING *", [nome,email,senha,id])
+        if (!estoque.status) {
 
-        if(userModify.rowCount===1){
-
-            return{mensagem:"usuario modificado", data:[userModify.rows],status:true}
-
+            return {...estoque}
+            
         }
+
+        if (estoque.data?.quantidade > quantidade) {
+              
+
+            const productrModify = await pool.query("UPDATE produtos SET quantidade = quantidade-$1 where=$2 RETURNING *", [quantidade,id])
+    
+            if(productrModify.rowCount===1){
+    
+                return{mensagem:"Compra efetuada", data:[productrModify.rows],status:true}
+    
+            }
+        }
+
         
-        return {mensagem:"erro ao modificar usuario",  data:[userModify],status:false}
+        return {mensagem:"erro ao comprar",  data:[productrModify],status:false}
         
     }
 
     async delete(id) {
 
-        const userDeletado = await pool.query("DELETE FROM usuario WHERE id = $1",[id])
+        const produtoDeletado = await pool.query("DELETE FROM produtos WHERE id = $1",[id])
 
-        console.log(userDeletado)
-        if(userDeletado.rowCount===1){
-
-            return{mensagem:"usuario deletado", data:[],status:true}
-
+        console.log(produtoDeletado)
+        if(produtoDeletado.rowCount===1){
+            return{mensagem:"Produto deletado", data:[],status:true}
         }
         
-      
-
-        return  {mensagem:"usuario nao foi deletado", data:[userDeletado],status:false}
+        return  {mensagem:"Produto nao foi deletado", data:[produtoDeletado],status:false}
 
 
     }
 
 }
-
-export const usuarioService = new ProdutoService()
+export const produtoService = new ProdutoService()
