@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { produtoService } from "../services/produto";
 
 
 
@@ -8,77 +9,56 @@ const routesProduto = Router()
 
 
 
-routesProduto.post('/cadastro',async(req,res)=>{
-    const {nome,email,senha} = req.body
-    try {
-        const cadastro = await usuarioService.createUser({nome,email,senha})
+routesProduto.get('/buscar', async (req, res) => {
 
-        if (cadastro.status) {
-            return res.status(201).json(cadastro)
+    try {
+        const busca = await produtoService.getAll()
+
+        if (busca.status) {
+            res.status(200).json(busca)
         }
 
-        return res.status(400).json(cadastro)
+        res.status(400).json(busca)
 
 
     } catch (error) {
 
-        console.log(error);
-        
-        return res.status(500).json({mensagem:'Erro no servidor',status:false,error})
-        
-    }
+        console.error(error);
 
-} )
-routesProduto.post('/login',async(req,res)=>{
-    const {email,senha} = req.body
-    try {
-        const login = await usuarioService.login({email,senha})
+        res.status(500).json(error)
 
-        if (login.status) {
-            return res.status(201).json(login)
-        }
-
-        return res.status(400).json(login)
-
-
-    } catch (error) {
-
-        console.log(error);
-        
-        return res.status(500).json({mensagem:'Erro no servidor',status:false, error})
-        
-    }
-
-} )
-
-routesProduto.delete('/deletar/:id',async(req,res)=>{
-    const {id} = req.params
-    try {
-        const cadastro = await usuarioService.delete(id)
-
-        if (cadastro.status) {
-            return res.status(201).json(cadastro)
-        }
-
-        return res.status(400).json(cadastro)
-
-
-    } catch (error) {
-
-        console.log(error);
-        
-        return res.status(500).json({mensagem:'Erro no servidor',status:false,error})
-        
     }
 
 })
 
-routesProduto.put('/modificar/:id',async(req,res)=>{
-    const {nome,email,senha} = req.body
+routesProduto.get("/buscar/:id", async (req, res) => {
+    const id = body.params
 
-    const id = req.params
     try {
-        const cadastro = await usuarioService.put({nome,email,senha,id})
+        const busca = await produtoService.getById(id)
+
+        if (busca.status) {
+
+            res.status(200).json(busca)
+        }
+
+        res.status(400).json(busca)
+
+    } catch (error) {
+        console.error(error);
+
+        res.status(500).json(error)
+    }
+
+}
+)
+
+
+
+routesProduto.post('/cadastro', async (req, res) => {
+    const { nome, valor, quantidade } = req.body
+    try {
+        const cadastro = await produtoService.createProduto({ nome, valor, quantidade })
 
         if (cadastro.status) {
             return res.status(201).json(cadastro)
@@ -90,9 +70,56 @@ routesProduto.put('/modificar/:id',async(req,res)=>{
     } catch (error) {
 
         console.log(error);
-        
-        return res.status(500).json({mensagem:'Erro no servidor',status:false,error})
-        
+
+        return res.status(500).json({ mensagem: 'Erro no servidor', status: false, error })
+
+    }
+
+})
+
+
+routesProduto.delete('/deletar/:id', async (req, res) => {
+    const { id } = req.params
+    try {
+        const deletado = await produtoService.delete(id)
+
+        if (deletado.status) {
+            return res.status(201).json(deletado)
+        }
+
+        return res.status(400).json(deletado)
+
+
+    } catch (error) {
+
+        console.log(error);
+
+        return res.status(500).json({ mensagem: 'Erro no servidor', status: false, error })
+
+    }
+
+})
+
+routesProduto.put('/comprar/:id/:quantidade', async (req, res) => {
+    const { id, quantidade } = req.params
+
+
+    try {
+        const modificado = await produtoService.comprar(id, quantidade)
+
+        if (modificado.status) {
+            return res.status(201).json(modificado)
+        }
+
+        return res.status(400).json(modificado)
+
+
+    } catch (error) {
+
+        console.log(error);
+
+        return res.status(500).json({ mensagem: 'Erro no servidor', status: false, error })
+
     }
 
 

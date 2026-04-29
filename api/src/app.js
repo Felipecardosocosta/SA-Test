@@ -2,6 +2,7 @@ import express from"express";
 import  cors from "cors"
 import { pool } from "./config/db.js";
 import routesUsuario from "./routes/usuario.js";
+import routesProduto from "./routes/produto.js";
 
 
 const app = express()
@@ -15,9 +16,10 @@ pool.on('error', (err, client) => {
     process.exit(-1)
 })
 
-app.use('/',routesUsuario)
+app.use('/usuario',routesUsuario)
 
 
+app.use("/produto",routesProduto)
 
 
 

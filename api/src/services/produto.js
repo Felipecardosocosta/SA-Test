@@ -51,7 +51,7 @@ class ProdutoService {
         if (estoque.data?.quantidade > quantidade) {
               
 
-            const productrModify = await pool.query("UPDATE produtos SET quantidade = quantidade-$1 where=$2 RETURNING *", [quantidade,id])
+            const productrModify = await pool.query("UPDATE produtos SET quantidade = quantidade-$1 where id=$2 RETURNING *", [quantidade,id])
     
             if(productrModify.rowCount===1){
     

@@ -54,13 +54,13 @@ routesUsuario.post('/login',async(req,res)=>{
 routesUsuario.delete('/deletar/:id',async(req,res)=>{
     const {id} = req.params
     try {
-        const cadastro = await usuarioService.delete(id)
+        const deletado = await usuarioService.delete(id)
 
-        if (cadastro.status) {
-            return res.status(201).json(cadastro)
+        if (deletado.status) {
+            return res.status(201).json(deletado)
         }
 
-        return res.status(400).json(cadastro)
+        return res.status(400).json(deletado)
 
 
     } catch (error) {
@@ -78,13 +78,13 @@ routesUsuario.put('/modificar/:id',async(req,res)=>{
 
     const id = req.params
     try {
-        const cadastro = await usuarioService.put({nome,email,senha,id})
+        const modificado = await usuarioService.put({nome,email,senha,id})
 
-        if (cadastro.status) {
-            return res.status(201).json(cadastro)
+        if (modificado.status) {
+            return res.status(201).json(modificado)
         }
 
-        return res.status(400).json(cadastro)
+        return res.status(400).json(modificado)
 
 
     } catch (error) {
