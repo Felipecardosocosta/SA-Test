@@ -1,9 +1,5 @@
 
-/**
- * MODELO DE TESTES UNITÁRIOS - UsuarioService
- * 
- * Padrão AAA: Arrange → Act → Assert
- */
+
 
 import { jest } from '@jest/globals';
 import { usuarioService } from '../src/services/usuario.js';
@@ -12,7 +8,7 @@ import { pool } from '../src/config/db.js';
 describe('UsuarioService - Testes Unitários', () => {
 
     beforeEach(() => {
-        // Mockar a função query do pool manualmente
+   
         pool.query = jest.fn();
     });
 
