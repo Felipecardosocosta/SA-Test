@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router'
 
 import {
@@ -14,6 +14,7 @@ import {
     FaCalendarCheck
 } from "react-icons/fa"
 import { useAuth } from '../../contexts/AuthContext'
+
 
 const SideMenu = () => {
 
@@ -34,16 +35,18 @@ const SideMenu = () => {
         setIsCollapsed(!isCollapsed)
     }
 
+   
+
 
     return (
-        <aside
+        <aside 
             className={`
         h-screen bg-cyan-800 text-white flex flex-col justify-between transition-all duration-300  ${isCollapsed ? "w-15" : "w-64"}`}
         >
             <div className='p-4 flex items-center justify-between border-b border-cyan-700' >
                 {
                     !isCollapsed && (
-                        <h1 className='test-lg font-bold'>Clinica +</h1>
+                        <h1 className='test-lg font-bold'>Pet Shop</h1>
                     )
                 }
                 <button
@@ -51,7 +54,7 @@ const SideMenu = () => {
                     onClick={toggleMenu}
                 >
                     {isCollapsed ?
-                        <MdMenu size={24} />: 
+                        <MdMenu size={24} /> :
                         <MdClose size={24} />
 
                     }
@@ -65,61 +68,44 @@ const SideMenu = () => {
             <nav className='flex-1 p-4 space-y-4 overflow-y-auto'>
                 <ul className='space-y-3 '>
                     <li>
-                        <Link 
-                        to={"/home"}
-                        className='flex items-center gap-3 hover:text-cyan-300'
-                        
-                        > 
-                        <MdDashboard
-                        size={20}
-                        />
-                        {!isCollapsed && <span>Inicio</span>}
-                        
+                        <Link
+                            to={"/dashboard"}
+                            className='flex items-center gap-3 hover:text-cyan-300'
+
+                        >
+                            <MdDashboard
+                                size={20}
+                            />
+                            {!isCollapsed && <span>Inicio</span>}
+
                         </Link>
                     </li>
                     <li>
-                        <Link 
-                        to={"/patients"}
-                        className='flex items-center gap-3 hover:text-cyan-300'
-                        
-                        > 
-                        <FaUserPlus
-                        size={20}
-                        />
-                        {!isCollapsed && <span>Pacientes</span>}
-                        
+                        <Link
+                            to={"/patients"}
+                            className='flex items-center gap-3 hover:text-cyan-300'
+
+                        >
+                            <FaUserPlus
+                                size={20}
+                            />
+                            {!isCollapsed && <span>Produtos</span>}
+
                         </Link>
                     </li>
                     <li>
-                        <Link 
-                        to={"/consults"}
-                        className='flex items-center gap-3 hover:text-cyan-300'
-                        
-                        > 
-                        <FaCalendarCheck
-                        size={20}
-                        />
-                        {!isCollapsed && <span>Consultas</span>}
-                        
+                        <Link
+                            to={"/consults"}
+                            className='flex items-center gap-3 hover:text-cyan-300'
+
+                        >
+                            <FaCalendarCheck
+                                size={20}
+                            />
+                            {!isCollapsed && <span>Comprar</span>}
+
                         </Link>
                     </li>
-                    <li>
-                        <Link 
-                        to={"/exams"}
-                        className='flex items-center gap-3 hover:text-cyan-300'
-                        
-                        > 
-                        <FaListAlt
-                        size={20}
-                        />
-                        {!isCollapsed && <span>Exame</span>}
-                        
-                        </Link>
-                    </li>
-
-
-
-
 
 
                 </ul>

@@ -8,7 +8,8 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test": "npx playwright test --ui"
+    "test": "npx playwright test --ui",
+    "server": "npx json-server ./src/services/db.json"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.2.2",

@@ -62,7 +62,9 @@ export const LoginForm = () => {
 
   return (
 
-    <div className='max-w-md mx-auto mt-10  bg-white p-8 rounded-xl shadow-lg'>
+    <div className='min-w-80 max-h-100 mx-auto mt-10  bg-white p-8 rounded-xl shadow-lg'>
+
+      
       <h1 className='text-2x1 font-bold text-center mb-6' >Login</h1>
 
       <form onSubmit={handleSubmit}
@@ -116,8 +118,6 @@ export const LoginForm = () => {
           className='text-blue-600 hover:underline'
         >
           Criar Conta
-
-
         </button>
 
 
