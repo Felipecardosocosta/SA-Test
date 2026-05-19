@@ -1,8 +1,3 @@
-
-/**
- * MODELO DE TESTES UNITÁRIOS - ProdutoService
- */
-
 import { jest } from '@jest/globals';
 import { produtoService } from '../src/services/produto.js';
 import { pool } from '../src/config/db.js';
@@ -10,7 +5,7 @@ import { pool } from '../src/config/db.js';
 describe('ProdutoService - Testes Unitários', () => {
 
     beforeEach(() => {
-        // Mockar a função query do pool manualmente
+       
         pool.query = jest.fn();
     });
 
@@ -88,7 +83,7 @@ describe('ProdutoService - Testes Unitários', () => {
 
     describe('CT-14: Método createProduto() - Criar Produto', () => {
         test('Deve criar produto com sucesso', async () => {
-            // Arrange
+   
             const novoProduto = { nome: 'Brinquedo', valor: 200, quantidade: 15 };
             const produtoCriado = { id: 3, ...novoProduto };
 
@@ -97,10 +92,10 @@ describe('ProdutoService - Testes Unitários', () => {
                 rowCount: 1
             });
 
-            // Act
+
             const resultado = await produtoService.createProduto(novoProduto);
 
-            // Assert
+     
             expect(resultado.status).toBe(true);
             expect(resultado.mensagem).toBe('Produto criado');
             expect(resultado.data).toContainEqual(produtoCriado);
@@ -111,14 +106,13 @@ describe('ProdutoService - Testes Unitários', () => {
         });
 
         test('Deve retornar erro quando falha ao criar produto', async () => {
-            // Arrange
+       
             const novoProduto = { nome: 'Vermicida', valor: 500, quantidade: 8 };
             pool.query.mockResolvedValueOnce({ rowCount: 0 });
 
-            // Act
             const resultado = await produtoService.createProduto(novoProduto);
 
-            // Assert
+  
             expect(resultado.status).toBe(false);
             expect(resultado.mensagem).toBe('erro ao criar produto');
         });
@@ -274,7 +268,7 @@ describe('ProdutoService - Testes Unitários', () => {
                 quantidade: 10
             };
 
-            // Assert
+         
             expect(typeof produtoComTipoDados.nome).toBe('string');
             expect(typeof produtoComTipoDados.valor).toBe('number');
             expect(typeof produtoComTipoDados.quantidade).toBe('number');
