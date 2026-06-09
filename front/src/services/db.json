@@ -29,13 +29,16 @@
   ],
   "products":[
     {
+      "id":"1",
       "nome":"Ração",
       "valor":20,
       "quantidade":15
 
 
     },
-    {"nome":"Petisco",
+    {
+      "id":"2",
+      "nome":"Petisco",
       "valor":50,
       "quantidade":20
     }

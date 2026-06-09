@@ -32,9 +32,24 @@ No package.json:
 meu-projeto/
 ├── package.json
 └── src/
+
+    ├── config/
+        └──db.js
+    ├── routes/
+        ├──produtos.js
+        └──usuario.js
+    ├── services/
+        ├──produtos.js
+        ├──env.js
+        └──usuario.js
     ├── app.js
     ├── server.js
     └── userService.js
+
+└── tests/
+   ├──produtos.test.js
+   ├──sum.test.js
+   └──usuario.test.js    
 ```
 
 ---

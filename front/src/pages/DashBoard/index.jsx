@@ -2,6 +2,7 @@ import React from 'react'
 import AllProducts from '../../components/AllProducts'
 import AllStorage from '../../components/AllStorage'
 import AllValuesStorage from '../../components/AllValueStorage'
+import ListProducts from '../../components/ListProducts'
 
 
 const DashBoard = () => {
@@ -16,7 +17,7 @@ const DashBoard = () => {
     
       </div>
 
-      <h2>Lista de produtos</h2>
+      <ListProducts/>
       
       
       

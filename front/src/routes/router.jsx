@@ -5,6 +5,7 @@ import Login from "../pages/Login"
 import DashBoard from "../pages/DashBoard"
 import PrivateRouter from "../components/PrivateRoute"
 import DashboardLayouts from "../layouts/DashboardLayouts"
+import Product from "../components/Product"
 
 
 
@@ -21,7 +22,10 @@ const router = createBrowserRouter([
                 <DashboardLayouts />
             </PrivateRouter>
         ),children:[
-            {path:"/dashboard",element:<DashBoard/>}
+            {path:"/dashboard",element:<DashBoard/>},
+            {path:"/products/:id",element:<Product />}
+
+
         ]
     },
 ])

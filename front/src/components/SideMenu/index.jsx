@@ -82,7 +82,7 @@ const SideMenu = () => {
                     </li>
                     <li>
                         <Link
-                            to={"/patients"}
+                            to={"/produtos"}
                             className='flex items-center gap-3 hover:text-cyan-300'
 
                         >
@@ -95,7 +95,7 @@ const SideMenu = () => {
                     </li>
                     <li>
                         <Link
-                            to={"/consults"}
+                            to={"/compra"}
                             className='flex items-center gap-3 hover:text-cyan-300'
 
                         >
