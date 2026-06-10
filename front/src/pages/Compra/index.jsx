@@ -20,25 +20,25 @@ const Compra = () => {
     useEffect(() => {
         fetchProducts()
     }, [])
-    const {id} = useParams()
+    const { id } = useParams()
 
     const fetchProducts = async () => {
-      
+
         try {
             setLoading(true)
-            
-            
+
+
             const response = await axios.get('http://localhost:3000/products')
-            
-            
+
+
             console.log(response)
             setProducts(response.data.filter(p => p.quantidade > 0))
-            
-             if (id) {
 
-                 handleInputChange('produtoId',id)
+            if (id) {
 
-             }
+                handleInputChange('produtoId', id)
+
+            }
 
         } catch (error) {
             console.error("Erro ao obter produtos", error)
