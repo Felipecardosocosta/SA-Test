@@ -37,7 +37,7 @@ const ListProducts = () => {
         setSearchTerm(e.target.value)
     }
 
-    const filteredProducts = products.filter((product) => [product.nome, product.valor, product.quantidade].join(" ").toLowerCase().includes(searchTerm.toLowerCase()))
+    const filteredProducts = products.filter((product) => [product.nome, product.valor].join(" ").toLowerCase().includes(searchTerm.toLowerCase()))
 
 
     return (
@@ -86,7 +86,7 @@ const ListProducts = () => {
                                             <div>
                                                 <p className='font-semibold text-gray-800'>{product.nome}</p>
                                                 <p className='text-sm text-gray-600'>Valor: {valorFormatado( product.valor)}</p>
-                                                <p className='text-sm text-gray-600'>Quantidade: {product.quantidade}</p>
+                                               
                                             </div>
                                         </div>
 

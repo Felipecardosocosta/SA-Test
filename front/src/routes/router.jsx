@@ -6,6 +6,8 @@ import DashBoard from "../pages/DashBoard"
 import PrivateRouter from "../components/PrivateRoute"
 import DashboardLayouts from "../layouts/DashboardLayouts"
 import Product from "../components/Product"
+import Products from "../pages/Products"
+import Compra from "../pages/Compra"
 
 
 
@@ -17,15 +19,16 @@ const router = createBrowserRouter([
 
     },
     {
-        element:(
+        element: (
             <PrivateRouter>
                 <DashboardLayouts />
             </PrivateRouter>
-        ),children:[
-            {path:"/dashboard",element:<DashBoard/>},
-            {path:"/products/:id",element:<Product />}
-
-
+        ), children: [
+            { path: "/dashboard", element: <DashBoard /> },
+            { path: "/produtos/", element: <Products /> },
+            { path: "/compra/", element: <Compra /> },
+            { path: "/compra/:id", element: <Compra /> },
+            { path: "/products/:id", element: <Product /> }
         ]
     },
 ])

@@ -4,7 +4,7 @@ import { LoginForm } from '../../components/LoginForm'
 const Login = () => {
     return (
         <>
-        <div className='flex min-h-screen bg-gray-100 p-40 ' >
+        <div className='flex min-h-screen bg-gray-950 p-40 ' >
 
             
         

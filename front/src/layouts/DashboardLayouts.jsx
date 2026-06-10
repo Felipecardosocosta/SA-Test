@@ -3,22 +3,24 @@ import { Outlet } from 'react-router'
 
 import { useAuth } from '../contexts/AuthContext'
 import SideMenu from '../components/SideMenu'
+import { useState } from 'react'
 
 const DashboardLayouts = () => {
 
     const { user, logout } = useAuth()
+    const [isCollapsed, setIsCollapsed] = useState(false)
 
 
     return (
         <div className='flex min-h-screen bg-gray-100' >
             {/* {barra lateral} */}
             
-           <SideMenu/>
+           <SideMenu isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed}  />
 
 
             {/* { Conteudo principal } */}
 
-            <main className='flex-1 flex flex-col'>
+            <main className={`flex-1 flex flex-col  ${isCollapsed ? "ml-15" : "ml-64"}`}>
 
                 <header className='flex justify-between items-center bg-white p-4 shadow'>
 
@@ -43,7 +45,7 @@ const DashboardLayouts = () => {
 
              {/* Paginas internar do dashboard */}
 
-             <section className='flex-1 p-6 overflow-y-auto'>
+             <section className='flex-1 p-6  overflow-y-auto'>
 
                 <Outlet/>
 

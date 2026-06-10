@@ -16,14 +16,14 @@ import {
 import { useAuth } from '../../contexts/AuthContext'
 
 
-const SideMenu = () => {
+const SideMenu = ({isCollapsed,setIsCollapsed}) => {
 
     const navigate = useNavigate()
 
     const { logout } = useAuth()
 
 
-    const [isCollapsed, setIsCollapsed] = useState(false)
+    
 
     const handleLogout = () => {
         logout()
@@ -35,13 +35,13 @@ const SideMenu = () => {
         setIsCollapsed(!isCollapsed)
     }
 
-   
+
 
 
     return (
-        <aside 
+        <aside
             className={`
-        h-screen bg-cyan-800 text-white flex flex-col justify-between transition-all duration-300  ${isCollapsed ? "w-15" : "w-64"}`}
+        h-screen  bg-cyan-800 text-white flex flex-col justify-between flex- transition-all duration-300 fixed ${isCollapsed ? "w-15" : "w-64"}`}
         >
             <div className='p-4 flex items-center justify-between border-b border-cyan-700' >
                 {
