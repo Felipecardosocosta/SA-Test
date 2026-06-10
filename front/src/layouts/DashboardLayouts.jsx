@@ -20,7 +20,7 @@ const DashboardLayouts = () => {
 
             {/* { Conteudo principal } */}
 
-            <main className={`flex-1 flex flex-col  ${isCollapsed ? "ml-15" : "ml-64"}`}>
+            <main className={`flex-1 flex flex-col transition-all duration-300 ${isCollapsed ? "ml-15" : "ml-64"}`}>
 
                 <header className='flex justify-between items-center bg-white p-4 shadow'>
 

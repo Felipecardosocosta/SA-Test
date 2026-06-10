@@ -23,8 +23,6 @@ export const LabelInput = ({ type,id, text, name,value,setValue, ...rest}) => {
         
                 {...rest}
              
-                
-               
              
             />
 
