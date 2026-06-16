@@ -55,7 +55,7 @@ describe('ProdutoService - Testes Unitários', () => {
             expect(resultado.mensagem).toBe('Produto encontrado');
             expect(resultado.data).toEqual(produtoEncontrado);
             expect(pool.query).toHaveBeenCalledWith(
-                'SELECT * from produtos where id=$1',
+                'SELECT * from produto where id=$1',
                 [1]
             );
         });
@@ -100,7 +100,7 @@ describe('ProdutoService - Testes Unitários', () => {
             expect(resultado.mensagem).toBe('Produto criado');
             expect(resultado.data).toContainEqual(produtoCriado);
             expect(pool.query).toHaveBeenCalledWith(
-                'INSERT INTO produtos(nome,valor,quantidade) VALUES($1,$2,$3) RETURNING *',
+                'INSERT INTO produto(nome,valor,quantidade) VALUES($1,$2,$3) RETURNING *',
                 [novoProduto.nome, novoProduto.valor, novoProduto.quantidade]
             );
         });
@@ -231,7 +231,7 @@ describe('ProdutoService - Testes Unitários', () => {
             expect(resultado.status).toBe(true);
             expect(resultado.mensagem).toBe('Produto deletado');
             expect(pool.query).toHaveBeenCalledWith(
-                'DELETE FROM produtos WHERE id = $1',
+                'DELETE FROM produto WHERE id = $1',
                 [idProduto]
             );
         });

@@ -39,7 +39,7 @@ const Products = () => {
             setError('')
             setSuccess('')
 
-            const response = await axios.post('http://localhost:3000/produtos/cadastro', {
+            const response = await axios.post('http://localhost:3000/produto/cadastro', {
                 nome: formData.nome.trim(),
                 valor: parseFloat(formData.valor),
                 quantidade: parseInt(formData.quantidade)
@@ -54,11 +54,15 @@ const Products = () => {
                 })
                 setTimeout(() => setSuccess(''), 3000)
             } else {
-                setError(response.data.mensagem || 'Erro ao adicionar produto')
+                setError(response.data.data.mensagem || 'Erro ao adicionar produto')
             }
         } catch (error) {
+
+        
             console.error("Erro ao adicionar produto", error)
+
             setError("Erro ao adicionar produto. Tente novamente.")
+
         } finally {
             setLoading(false)
         }

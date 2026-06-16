@@ -33,9 +33,12 @@ export const LoginForm = () => {
     e.preventDefault()
 
     try {
-      const response = await axios.get('http://localhost:3000/users', {
-        params: { email, password }
+
+
+      const response = await axios.post('http://localhost:3000/usuario/login', {
+        email, senha:password 
       })
+      console.log(response)
       if (response.data.length === 0) {
         toast.error("Usuario não encontrado. Verifique o email e senha", { autoClose: 3000, hideProgressBar: true })
         return
@@ -45,12 +48,13 @@ export const LoginForm = () => {
       }
       )
 
-      login(response.data[0].email)
+      login(response.data.data[0].email)
       navigate('/dashboard')
 
 
     } catch (error) {
 
+      console.log(error)
       toast.error("Erro interno no servidor", {
         autoClose: 3000,
 
@@ -128,7 +132,7 @@ export const LoginForm = () => {
         onClose={() => setIsMotalOpen(false)}
 
       >
-        <RegisterUser />
+        <RegisterUser onClose={() => setIsMotalOpen(false)} />
 
 
       </Modal>

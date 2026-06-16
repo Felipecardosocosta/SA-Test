@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { PiBoneBold } from "react-icons/pi";
 import { Link } from 'react-router'
 import { valorFormatado } from '../../services/valorFormatado'
+import { toast } from 'react-toastify';
 
 const ListProducts = () => {
 
@@ -15,16 +16,22 @@ const ListProducts = () => {
 
         const fecthProducts = async () => {
             try {
-                const response = await axios.get("http://localhost:3000/products")
-                const productsData = response.data
+                const response = await axios.get("http://localhost:3000/produto/buscar")
+                const productsData = response.data.data
             
                
                 setProducts(productsData)
+                
 
 
             } catch (error) {
-                console.log("Erro ao obter dados dos produtos", error);
 
+                const errorMessage = error?.response?.data?.mensagem || "Erro ao buscar produtos "
+
+                toast.error(errorMessage, {
+                autoClose: 2000,
+                hideProgressBar: true
+            })
 
             }
         }
@@ -106,7 +113,7 @@ const ListProducts = () => {
 
                             }
                         </ul>
-                    ) : (<p className='text-gray-500 text-center py-6' >Nenum paciente encontrado</p>)
+                    ) : (<p className='text-gray-500 text-center py-6' >Nenum produto encontrado</p>)
 
                 }
 

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { usuarioService } from "../services/usuario";
+import { usuarioService } from "../services/usuario.js";
 
 
 
@@ -31,8 +31,9 @@ routesUsuario.post('/cadastro',async(req,res)=>{
 } )
 routesUsuario.post('/login',async(req,res)=>{
     const {email,senha} = req.body
+   
     try {
-        const login = await usuarioService.login({email,senha})
+        const login = await usuarioService.login(email,senha)
 
         if (login.status) {
             return res.status(201).json(login)
@@ -44,6 +45,11 @@ routesUsuario.post('/login',async(req,res)=>{
     } catch (error) {
 
         console.log(error);
+
+        if (error?.message) {
+            return res.status(400).json({mensagem:error.message,status:false, error})
+            
+        }
         
         return res.status(500).json({mensagem:'Erro no servidor',status:false, error})
         

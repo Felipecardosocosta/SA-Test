@@ -12,15 +12,15 @@ const AllValuesStorage = () => {
         const fetchValueStorage = async () => {
 
             try {
-                const response = await axios.get('http://localhost:3000/products')
+                const response = await axios.get('http://localhost:3000/produto/buscar')
 
 
 
-                console.log(response);
+          
 
                 let value = 0
 
-                response.data.map(product => value = Number(product.quantidade) * Number(product.valor) + value)
+                response.data.data.map(product => value = Number(product.quantidade) * Number(product.valor) + value)
 
 
                 

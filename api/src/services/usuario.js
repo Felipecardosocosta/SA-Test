@@ -8,10 +8,15 @@ class UsuarioService {
     }
 
     async login(email, senha) {
-        const res = await pool.query("SELECT * from usuario where email=$1 AND senha=$2", [email, senha])
 
+        if (!email|| !senha) {
+
+            throw new Error("Senha ou email Invalido")
+        }
+
+        const res = await pool.query("SELECT * from usuario where email=$1 AND senha=$2", [email, senha])
+     
         if (res.rows.length > 0) {
-            console.log(res)
             return { mensagem: "usuario logado", data: [res.rows[0]], status: true }
         }
 

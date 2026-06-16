@@ -1,0 +1,14 @@
+
+CREATE TABLE usuario(
+id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+nome VARCHAR(200) NOT NULL,
+email VARCHAR(200) UNIQUE NOT NULL,
+senha VARCHAR(200) NOT NULL
+);
+
+CREATE TABLE produto(
+id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+nome VARCHAR(200) NOT NULL,
+valor DECIMAL(8,2) NOT NULL,
+quantidade INT NOT NULL
+)

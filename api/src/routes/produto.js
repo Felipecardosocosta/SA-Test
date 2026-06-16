@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { produtoService } from "../services/produto";
+import { produtoService } from "../services/produto.js";
 
 
 
@@ -11,43 +11,44 @@ const routesProduto = Router()
 
 routesProduto.get('/buscar', async (req, res) => {
 
+
     try {
         const busca = await produtoService.getAll()
 
         if (busca.status) {
-            res.status(200).json(busca)
+          return  res.status(200).json(busca)
         }
 
-        res.status(400).json(busca)
+       return res.status(400).json(busca)
 
 
     } catch (error) {
 
         console.error(error);
 
-        res.status(500).json(error)
+       return res.status(500).json(error)
 
     }
 
 })
 
 routesProduto.get("/buscar/:id", async (req, res) => {
-    const id = body.params
+    const {id} = req.params
 
     try {
         const busca = await produtoService.getById(id)
 
         if (busca.status) {
 
-            res.status(200).json(busca)
+           return res.status(200).json(busca)
         }
 
-        res.status(400).json(busca)
+       return res.status(400).json(busca)
 
     } catch (error) {
         console.error(error);
 
-        res.status(500).json(error)
+       return res.status(500).json(error)
     }
 
 }

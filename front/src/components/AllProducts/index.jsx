@@ -10,12 +10,12 @@ const AllProducts = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await axios.get('http://localhost:3000/products')
+                const response = await axios.get('http://localhost:3000/produto/buscar')
 
-                console.log(response);
+              
 
 
-                setProductCounter(response.data.length)
+                setProductCounter(response.data.data.length)
 
                 return
 

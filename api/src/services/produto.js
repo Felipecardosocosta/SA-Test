@@ -2,7 +2,9 @@ import { pool } from "../config/db.js"
 
 class ProdutoService {
     async getAll() {
-        const res = await pool.query("SELECT * from produtos")
+
+      
+        const res = await pool.query("SELECT * from produto")
 
         if (res.rows.length > 0) {
 
@@ -13,7 +15,7 @@ class ProdutoService {
     }
 
     async getById(id) {
-        const res = await pool.query("SELECT * from produtos where id=$1", [id])
+        const res = await pool.query("SELECT * from produto where id=$1", [id])
 
         if (res.rows.length > 0) {
 
@@ -26,7 +28,7 @@ class ProdutoService {
 
 
     async createProduto({ nome, valor, quantidade }) {
-        const newProduto = await pool.query("INSERT INTO produtos(nome,valor,quantidade) VALUES($1,$2,$3) RETURNING *", [nome, valor, quantidade])
+        const newProduto = await pool.query("INSERT INTO produto(nome,valor,quantidade) VALUES($1,$2,$3) RETURNING *", [nome, valor, quantidade])
 
         if (newProduto.rowCount === 1) {
             console.log(newProduto.rows[0]);
@@ -59,7 +61,7 @@ class ProdutoService {
             if (estoque.data?.quantidade >= quantidadeNumber) {
 
 
-                const productrModify = await pool.query("UPDATE produtos SET quantidade = quantidade-$1 where id=$2 RETURNING *", [quantidadeNumber, id])
+                const productrModify = await pool.query("UPDATE produto SET quantidade = quantidade-$1 where id=$2 RETURNING *", [quantidadeNumber, id])
 
                 
                 if (productrModify.rowCount === 1) {
@@ -76,7 +78,7 @@ class ProdutoService {
 
     async delete (id) {
 
-            const produtoDeletado = await pool.query("DELETE FROM produtos WHERE id = $1", [id])
+            const produtoDeletado = await pool.query("DELETE FROM produto WHERE id = $1", [id])
 
             console.log(produtoDeletado)
             if (produtoDeletado.rowCount === 1) {

@@ -1,13 +1,14 @@
 import { Pool } from 'pg'
 import dotenv from 'dotenv'
+import env from '../env.js'
 
 dotenv.config()
 
 export const pool = new Pool({
-    host: process.env.HOST,
-    user: process.env.USER,
-    database: process.env.DATABASE,
-    password: process.env.PASSWORD,
+    host: env.host,
+    user: env.user,
+    database: env.database,
+    password: env.password,
     max: 20,
     idleTimeoutMillis: 30000,
     connectionTimeoutMillis: 2000,

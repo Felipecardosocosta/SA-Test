@@ -28,11 +28,11 @@ const Compra = () => {
             setLoading(true)
 
 
-            const response = await axios.get('http://localhost:3000/products')
+            const response = await axios.get('http://localhost:3000/produto/buscar')
 
 
             console.log(response)
-            setProducts(response.data.filter(p => p.quantidade > 0))
+            setProducts(response.data.data.filter(p => p.quantidade > 0))
 
             if (id) {
 
@@ -81,7 +81,7 @@ const Compra = () => {
             setError('')
 
             const response = await axios.put(
-                `http://localhost:3000/produtos/comprar/${formData.produtoId}/${quantidade}`
+                `http://localhost:3000/produto/comprar/${formData.produtoId}/${quantidade}`
             )
 
             if (response.data.status) {

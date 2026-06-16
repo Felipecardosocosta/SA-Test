@@ -3,11 +3,14 @@ import { LabelInput } from '../LabelInput/LabelInput'
 import { toast } from 'react-toastify'
 import axios from 'axios'
 
-const RegisterUser = () => {
+const RegisterUser = ({onClose}) => {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [nome, setNome] = useState("")
+
     const [confirmPassword, setconfirmPassword] = useState("")
+
 
 
 
@@ -22,6 +25,7 @@ const RegisterUser = () => {
         setEmail("")
         setPassword("")
         setconfirmPassword("")
+        setNome("")
         setIsPasswordMatch(true)
     }
 
@@ -39,18 +43,21 @@ const RegisterUser = () => {
         setIsSaving(true)
 
         try {
-            await axios.post('http://localhost:3000/users', {
-                email, password
+            await axios.post('http://localhost:3000/usuario/cadastro', {
+                nome,email,senha:password
             })
 
             setIsSaving(false)
             resetForm()
+            onClose()
+
             toast.success("Usuaro Criado com Sucesso", {
                 autoClose: 2000,
                 hideProgressBar: true
             })
 
         } catch (error) {
+            console.log(error.message)
             console.error(error)
             toast.error("Erro ao criar usaurio! ", {
                 autoClose: 2000,
@@ -85,6 +92,19 @@ const RegisterUser = () => {
                         text={"Email"}
                         value={email}
                         setValue={setEmail}
+
+                        required
+
+                    />
+                </fieldset>
+                <fieldset>
+                    <LabelInput
+                        id={"nome"}
+                        type={"text"}
+                        name={"nome"}
+                        text={"Nome"}
+                        value={nome}
+                        setValue={setNome}
 
                         required
 

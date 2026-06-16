@@ -10,13 +10,13 @@ const AllStorage = () => {
     useEffect(() => {
         const fetchStorage = async () => {
             try {
-                const response = await axios.get('http://localhost:3000/products')
+                const response = await axios.get('http://localhost:3000/produto/buscar')
 
-                console.log(response);
+                
                 
                 let quantidade =0
                 
-                response.data.map(product=> quantidade =  Number(product.quantidade) + quantidade)
+                response.data.data.map(product=> quantidade =  Number(product.quantidade) + quantidade)
 
                 setStorageCounter(quantidade)
 
