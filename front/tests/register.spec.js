@@ -7,24 +7,26 @@ test.describe('Cadastro de Usuário', () => {
   });
 
   test('deve cadastrar um novo usuário com sucesso', async ({ page }) => {
- 
+
     await page.getByRole('button', { name: 'Criar Conta' }).click();
 
- 
-    await page.getByLabel('Nome:').fill('Usuário de Teste');
-    
+
+
+    const cadastroForm =page.locator('div').filter({ has: page.getByRole('heading', { name: 'Criar Usuário', level: 2 }) }).last();
+
+    await cadastroForm.getByLabel('Nome:').fill('Usuário de Teste');
+
     const uniqueEmail = `teste${Date.now()}@exemplo.com`;
-    await page.getByLabel('Email:').fill(uniqueEmail);
-    
-    await page.getByLabel('Senha:', { exact: true }).fill('senha123456');
-    await page.getByLabel('Confirme Senha:').fill('senha123456');
+    await cadastroForm.getByLabel('Email:').fill(uniqueEmail);
 
-   
-    await page.getByRole('button', { name: 'Criar Usuario' }).click();
+    await cadastroForm.getByLabel('Senha:', { exact: true }).fill('senha123456');
+    await cadastroForm.getByLabel('Confirme Senha:').fill('senha123456');
 
-    
-    await expect(page.getByText('Usuaro Criado com Sucesso')).toBeVisible();
-    
+    await cadastroForm.getByRole('button', { name: 'Criar Usuario' }).click();
+
+
+    await expect(page.getByText('Usuario Criado com Sucesso')).toBeVisible();
+
 
     await expect(page.getByRole('heading', { name: 'Criar Usuário' })).not.toBeVisible();
   });
@@ -46,8 +48,8 @@ test.describe('Cadastro de Usuário', () => {
 
   test('deve validar campos obrigatórios via HTML5', async ({ page }) => {
     await page.getByRole('button', { name: 'Criar Conta' }).click();
-    
-  
+
+
     await page.getByRole('button', { name: 'Criar Usuario' }).click();
 
     await expect(page.getByRole('heading', { name: 'Criar Usuário' })).toBeVisible();

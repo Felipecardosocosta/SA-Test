@@ -51,7 +51,7 @@ const RegisterUser = ({onClose}) => {
             resetForm()
             onClose()
 
-            toast.success("Usuaro Criado com Sucesso", {
+            toast.success("Usuario Criado com Sucesso", {
                 autoClose: 2000,
                 hideProgressBar: true
             })
@@ -59,7 +59,7 @@ const RegisterUser = ({onClose}) => {
         } catch (error) {
             console.log(error.message)
             console.error(error)
-            toast.error("Erro ao criar usaurio! ", {
+            toast.error("Erro ao criar usuario! ", {
                 autoClose: 2000,
                 hideProgressBar: true
             })

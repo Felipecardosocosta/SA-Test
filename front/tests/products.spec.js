@@ -13,18 +13,21 @@ test.describe('Gerenciamento de Produtos (CRUD)', () => {
 
   test('deve cadastrar um novo produto e visualizá-lo na lista', async ({ page }) => {
 
-    await page.goto('/produtos');
+    await page.getByRole('link', { name: 'Produtos' }).click();
+
+
+    await expect(page).toHaveURL(/.*produtos/);
 
     const produtoNome = `Produto Teste ${Date.now()}`;
-    
-   
+
+
     await page.getByLabel('Nome do Produto:').fill(produtoNome);
     await page.getByLabel('Valor (R$):').fill('25.50');
     await page.getByLabel('Quantidade:').fill('10');
 
     await page.getByRole('button', { name: 'Adicionar Produto' }).click();
 
-  
+
     await expect(page.getByText('Produto adicionado com sucesso!')).toBeVisible();
 
 
@@ -34,8 +37,13 @@ test.describe('Gerenciamento de Produtos (CRUD)', () => {
   });
 
   test('deve realizar a "compra" de um produto ', async ({ page }) => {
-   
-    await page.goto('/compra');
+
+
+
+    await page.getByRole('link', { name: 'Comprar' }).click();
+
+
+    await expect(page).toHaveURL(/.*compra/);
 
 
     const rachaolabel = page.locator('label').filter({ hasText: 'Ração' }).first();
@@ -43,7 +51,7 @@ test.describe('Gerenciamento de Produtos (CRUD)', () => {
 
     await page.getByLabel('Quantidade a Comprar:').fill('1');
 
-  
+
     await page.getByRole('button', { name: 'Realizar Compra' }).click();
 
 
@@ -51,22 +59,25 @@ test.describe('Gerenciamento de Produtos (CRUD)', () => {
   });
 
   test('deve deletar um produto com sucesso', async ({ page }) => {
-  
-    await page.goto('/dashboard');
-    await page.getByPlaceholder('Digite o nome, valor ou quantidade').fill('Petisco');
-    
-  
+
+   
+
+    await expect(page).toHaveURL(/.*dashboard/);
+
+    await page.getByPlaceholder('Digite o nome, valor ou quantidade').fill('Ração');
+
+
     await page.getByRole('link', { name: 'Ver detalhes' }).first().click();
 
-  
+
     await page.getByRole('button', { name: 'Deletar' }).click();
 
 
     await expect(page.getByText('Produto deletado com sucesso')).toBeVisible();
 
-    
+
     await expect(page).toHaveURL(/.*dashboard/);
-    await page.getByPlaceholder('Digite o nome, valor ou quantidade').fill('Petisco');
+    await page.getByPlaceholder('Digite o nome, valor ou quantidade').fill('Ração');
     await expect(page.getByText('Nenum produto encontrado')).toBeVisible();
   });
 });
