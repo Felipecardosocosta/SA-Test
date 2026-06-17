@@ -15,7 +15,7 @@ const RegisterUser = ({onClose}) => {
 
 
 
-    const [isPassworddMatch, setIsPasswordMatch] = useState(true)
+    const [isPasswordMatch, setIsPasswordMatch] = useState(true)
 
     const [isSaving, setIsSaving] = useState(false)
 
@@ -57,8 +57,18 @@ const RegisterUser = ({onClose}) => {
             })
 
         } catch (error) {
-            console.log(error.message)
-            console.error(error)
+            console.log(error?.response.data.error.code)
+
+            if (error?.response.data.error.code == "23505") {
+                 toast.error("Email ja esta sendo utilizado", {
+                autoClose: 2000,
+                hideProgressBar: true
+            })
+            setIsSaving(false)
+                
+            return
+            }
+         
             toast.error("Erro ao criar usuario! ", {
                 autoClose: 2000,
                 hideProgressBar: true
@@ -86,7 +96,7 @@ const RegisterUser = ({onClose}) => {
             <form onSubmit={handleSubmit}>
                 <fieldset>
                     <LabelInput
-                        id={"email"}
+                        id={"register-email"}
                         type={"email"}
                         name={"Email"}
                         text={"Email"}
@@ -99,7 +109,7 @@ const RegisterUser = ({onClose}) => {
                 </fieldset>
                 <fieldset>
                     <LabelInput
-                        id={"nome"}
+                        id={"register-nome"}
                         type={"text"}
                         name={"nome"}
                         text={"Nome"}
@@ -113,7 +123,7 @@ const RegisterUser = ({onClose}) => {
 
                 <fieldset>
                     <LabelInput
-                        id={"password"}
+                        id={"register-password"}
                         type={'password'}
                         name={'senha'}
                         text={"Senha"}
@@ -125,7 +135,7 @@ const RegisterUser = ({onClose}) => {
                 </fieldset>
                 <fieldset>
                     <LabelInput
-                        id={"confirmPassword"}
+                        id={"register-confirmPassword"}
                         type={'password'}
                         name={'senha'}
                         text={"Confirme Senha"}
@@ -134,8 +144,8 @@ const RegisterUser = ({onClose}) => {
                         minLength={8}
                         required
                     />
-                    {!isPassworddMatch && (
-                        <p className='text-red-500 tesxt-sm mt-1' >As senhas não correspondem</p>
+                    {!isPasswordMatch && (
+                        <p className='text-red-500 text-sm mt-1' >As senhas não correspondem</p>
                     )}
                 </fieldset>
 
