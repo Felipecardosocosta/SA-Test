@@ -89,8 +89,11 @@ test.describe('Cadastro de Usuário', () => {
 
     const cadastroForm = page.locator('div').filter({ has: page.getByRole('heading', { name: 'Criar Usuário', level: 2 }) }).last();
 
+   
+
 
     await cadastroForm.getByRole('button', { name: 'Criar Usuario' }).click();
+
 
     await expect(cadastroForm.getByRole('heading', { name: 'Criar Usuário' })).toBeVisible();
   });

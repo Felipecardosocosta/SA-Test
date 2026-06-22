@@ -1,6 +1,8 @@
 import { test, expect } from '@playwright/test';
 
 test.describe('Gerenciamento de Produtos (CRUD)', () => {
+  test.describe.configure({ mode: 'serial' });
+  
   test.beforeEach(async ({ page }) => {
 
     await page.goto('/');
@@ -18,7 +20,7 @@ test.describe('Gerenciamento de Produtos (CRUD)', () => {
 
     await expect(page).toHaveURL(/.*produtos/);
 
-    const produtoNome = `Produto Teste ${Date.now()}`;
+    const produtoNome = `Produto Teste`;
 
 
     await page.getByLabel('Nome do Produto:').fill(produtoNome);
@@ -46,7 +48,7 @@ test.describe('Gerenciamento de Produtos (CRUD)', () => {
     await expect(page).toHaveURL(/.*compra/);
 
 
-    const rachaolabel = page.locator('label').filter({ hasText: 'Ração' }).first();
+    const rachaolabel = page.locator('label').filter({ hasText: 'Produto Teste' }).first();
     await rachaolabel.click();
 
     await page.getByLabel('Quantidade a Comprar:').fill('1');
@@ -64,7 +66,7 @@ test.describe('Gerenciamento de Produtos (CRUD)', () => {
 
     await expect(page).toHaveURL(/.*dashboard/);
 
-    await page.getByPlaceholder('Digite o nome, valor ou quantidade').fill('Ração');
+    await page.getByPlaceholder('Digite o nome, valor ou quantidade').fill('Produto Teste');
 
 
     await page.getByRole('link', { name: 'Ver detalhes' }).first().click();
@@ -77,7 +79,7 @@ test.describe('Gerenciamento de Produtos (CRUD)', () => {
 
 
     await expect(page).toHaveURL(/.*dashboard/);
-    await page.getByPlaceholder('Digite o nome, valor ou quantidade').fill('Ração');
+    await page.getByPlaceholder('Digite o nome, valor ou quantidade').fill('Produto Teste');
     await expect(page.getByText('Nenum produto encontrado')).toBeVisible();
   });
 });
